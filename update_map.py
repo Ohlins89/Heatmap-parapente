@@ -58,7 +58,7 @@ folium.TileLayer("https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png", attr="OpenT
 for annee in sorted(vols_par_annee.keys(), reverse=True):
     group = folium.FeatureGroup(name=f"Vols {annee}", show=True)
     for trace in vols_par_annee[annee]:
-        folium.PolyLine(trace, color="red", weight=2, opacity=0.4).add_to(group)
+        folium.PolyLine(trace, color="red", weight=4, opacity=0.6).add_to(group)
     group.add_to(m)
 
 # Menu de contrôle en haut à droite
