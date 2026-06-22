@@ -1,0 +1,33 @@
+name: Mise à jour Carte Parapente
+
+on:
+  schedule:
+    - cron: '0 0 * * 0' # S'exécute tous les dimanches à minuit
+  workflow_dispatch: # Permet de lancer la mise à jour manuellement d'un clic
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Récupérer le dépôt
+        uses: actions/checkout@v3
+
+      - name: Installer Python
+        uses: actions/setup-python@v4
+        with:
+          python-python-version: '3.x'
+
+      - name: Installer les dépendances
+        run: |
+          pip install -r requirements.txt
+
+      - name: Exécuter le script de mise à jour
+        run: python update_map.py
+
+      - name: Sauvegarder les changements
+        run: |
+          git config --global user.name 'Robot Parapente'
+          git config --global user.email 'robot@parapente.com'
+          git add -A
+          git diff-index --quiet HEAD || git commit -m "Mise à jour automatique des traces XContest"
+          git push
