@@ -2,20 +2,20 @@ name: Mise à jour Carte Parapente
 
 on:
   schedule:
-    - cron: '0 0 * * 0' # S'exécute tous les dimanches à minuit
-  workflow_dispatch: # Permet de lancer la mise à jour manuellement d'un clic
+    - cron: '0 0 * * 0' # Tous les dimanches à minuit
+  workflow_dispatch: # Permet le lancement manuel
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Récupérer le dépôt
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Installer Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
-          python-python-version: '3.x'
+          python-version: '3.11'
 
       - name: Installer les dépendances
         run: |
